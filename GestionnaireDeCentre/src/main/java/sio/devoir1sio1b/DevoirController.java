@@ -1,10 +1,12 @@
 package sio.devoir1sio1b;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import sio.devoir1sio1b.models.Chambre;
 import sio.devoir1sio1b.models.Enfant;
 import sio.devoir1sio1b.models.Maison;
@@ -22,17 +24,17 @@ public class DevoirController implements Initializable
     @FXML
     private TableColumn tcNomMaison;
     @FXML
-    private TableView tvMaisons;
+    private TableView<Maison> tvMaisons;
     @FXML
     private TableColumn tcNomEnfantChambre;
     @FXML
     private TableColumn tcNomChambre;
     @FXML
-    private TableView tvEnfantsAll;
+    private TableView<Enfant> tvEnfantsAll;
     @FXML
-    private TableView tvEnfantsChambre;
+    private TableView<Enfant> tvEnfantsChambre;
     @FXML
-    private TableView tvChambres;
+    private TableView<Chambre> tvChambres;
     @FXML
     private TableColumn tcNomEnfantsAll;
     @FXML
@@ -55,8 +57,27 @@ public class DevoirController implements Initializable
         enfants = new ArrayList<>();
         initDatas();
 
-        // A vous de jouer
+        //definition des colones des table view
 
+        //tvMaison
+        tcNomMaison.setCellValueFactory(new PropertyValueFactory<>("nomMaison"));
+
+        //tvEnfant
+        tcNomEnfantsAll.setCellValueFactory(new PropertyValueFactory<>("nomEnfant"));
+        tcPrenomEnfantsAll.setCellValueFactory(new PropertyValueFactory<>("prenomEnfant"));
+        tcSexeEnfantsAll.setCellValueFactory(new PropertyValueFactory<>("sexeEnfant"));
+
+        //tvChambre
+        tcNomChambre.setCellValueFactory(new PropertyValueFactory<>("nomChambre"));
+        tcTypeChambre.setCellValueFactory(new PropertyValueFactory<>("typeChambre"));
+
+        //tvEnfantChambre
+        tcNomEnfantChambre.setCellValueFactory(new PropertyValueFactory<>("nomEnfant"));
+        tcPrenomEnfantChambre.setCellValueFactory(new PropertyValueFactory<>("prenomEnfant"));
+
+        //rempliossage TV enfant et maison
+        tvMaisons.setItems(FXCollections.observableList(maisons));
+        tvEnfantsAll.setItems(FXCollections.observableList(enfants));
     }
 
     // Cette méthode permet de remplir les 2 collections
