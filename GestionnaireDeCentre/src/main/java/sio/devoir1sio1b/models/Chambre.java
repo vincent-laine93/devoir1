@@ -34,29 +34,17 @@ public class Chambre
     // Cette méthode permet de savoir s'il reste de la place dans la chambre
     public boolean verifierPlaceLibre()
     {
-        boolean placeLibre;
-
-        if (enfants.size() > 2){
-            placeLibre = false;
+        if (enfants.size() >= 2){
+            return true;
+        }else {
+            return false;
         }
-        else {
-            placeLibre = true;
-        }
-
-        return placeLibre;
     }
 
     // Cette méthode permet de savoir si le type de la chambre
     // correspond au sexe passé en paramétre
     public boolean verifierTypeChambre(String sexe)
     {
-        boolean verification;
-        if (sexe == typeChambre){
-            verification = true;
-        }
-        else {
-            verification = false;
-        }
-        return verification;
+        return typeChambre != sexe;
     }
 }

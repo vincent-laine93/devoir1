@@ -83,6 +83,7 @@ public class DevoirController implements Initializable
         tvMaisons.setItems(FXCollections.observableList(maisons));
         tvEnfantsAll.setItems(FXCollections.observableList(enfants));
 
+
         txtTauxCentreAere.setText(String.valueOf(tauxCentreAere));
     }
 
@@ -127,7 +128,6 @@ public class DevoirController implements Initializable
     public void tvChambresClicked(Event event)
     {
 
-
     }
 
     @FXML
@@ -142,8 +142,32 @@ public class DevoirController implements Initializable
     @FXML
     public void btnAjouterAction(ActionEvent actionEvent)
     {
-        // A vous de jouer
+        Chambre chambreSelectionner = tvChambres.getSelectionModel().getSelectedItem();
+        Enfant enfantSelectionner = tvEnfantsAll.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Choix incorrect");
+        alert.setHeaderText(null);
+        if (chambreSelectionner == null){
+            alert.setContentText("Veuillez selectionner un chambre");
+            alert.showAndWait();
+        } else if (enfantSelectionner == null) {
+            alert.setContentText("Veuillez selectionner un enfant");
+            alert.showAndWait();
+        } else if (chambreSelectionner.verifierTypeChambre(enfantSelectionner.getSexeEnfant())) {
+            alert.setContentText("Le type de chambre ne correspond pas");
+            alert.showAndWait();
+        } else if (chambreSelectionner.verifierPlaceLibre()) {
+            alert.setContentText("La chambre est pleine");
+            alert.showAndWait();
+        }else {
+            //ajout de l'enfant a la chambre et affichage du tvEnfantChambre
+            chambreSelectionner.ajouterEnfant(enfantSelectionner);
+            tvEnfantsChambre.setItems(FXCollections.observableList(chambreSelectionner.getEnfants()));
 
+            //supression et reafichage du tvEnfant
+            enfants.remove(enfantSelectionner);
+            tvEnfantsAll.setItems(FXCollections.observableList(enfants));
+        }
     }
 
     // Cette méthode permet de calculer le taux de remplissage
