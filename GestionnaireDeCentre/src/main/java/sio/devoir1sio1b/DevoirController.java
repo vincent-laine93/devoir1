@@ -50,6 +50,10 @@ public class DevoirController implements Initializable
     @FXML
     private TableColumn tcTypeChambre;
 
+    //variables
+    private double tauxMaison = 0.0;
+    private double tauxCentreAere = 0.0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -78,6 +82,8 @@ public class DevoirController implements Initializable
         //rempliossage TV enfant et maison
         tvMaisons.setItems(FXCollections.observableList(maisons));
         tvEnfantsAll.setItems(FXCollections.observableList(enfants));
+
+        txtTauxCentreAere.setText(String.valueOf(tauxCentreAere));
     }
 
     // Cette méthode permet de remplir les 2 collections
@@ -120,14 +126,16 @@ public class DevoirController implements Initializable
     @FXML
     public void tvChambresClicked(Event event)
     {
-        // A vous de jouer
+
 
     }
 
     @FXML
     public void tvMaisonsClicked(Event event)
     {
-        // A vous de jouer
+        Maison maisonSelectionner = tvMaisons.getSelectionModel().getSelectedItem();
+        tvChambres.setItems(FXCollections.observableList(maisonSelectionner.getChambres()));
+        txtTauxMaison.setText(String.valueOf(tauxMaison));
 
     }
 
