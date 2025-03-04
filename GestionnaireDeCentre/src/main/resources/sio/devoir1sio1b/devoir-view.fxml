@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.devoir1sio1b.DevoirController">
+   <children>
+      <Label layoutX="23.0" layoutY="83.0" text="Les maisons" />
+      <Label layoutX="272.0" layoutY="83.0" text="Les chambres" />
+      <Label layoutX="520.0" layoutY="83.0" text="Les enfants de la chambre" />
+      <Label layoutX="23.0" layoutY="275.0" text="Tous les enfants" />
+      <TableView fx:id="tvMaisons" layoutX="23.0" layoutY="110.0" onMouseClicked="#tvMaisonsClicked" prefHeight="138.0" prefWidth="222.0">
+        <columns>
+          <TableColumn fx:id="tcNomMaison" prefWidth="217.6000099182129" text="Nom" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tvChambres" layoutX="272.0" layoutY="110.0" onMouseClicked="#tvChambresClicked" prefHeight="138.0" prefWidth="212.0">
+         <columns>
+            <TableColumn fx:id="tcNomChambre" prefWidth="120.0" text="Nom" />
+            <TableColumn fx:id="tcTypeChambre" prefWidth="88.0" text="Type" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tvEnfantsAll" layoutX="23.0" layoutY="306.0" prefHeight="234.0" prefWidth="322.0">
+         <columns>
+            <TableColumn fx:id="tcNomEnfantsAll" prefWidth="114.39999771118164" text="Nom" />
+            <TableColumn fx:id="tcPrenomEnfantsAll" prefWidth="101.60000610351562" text="Prénom" />
+            <TableColumn fx:id="tcSexeEnfantsAll" prefWidth="100.00004577636719" text="Sexe" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tvEnfantsChambre" layoutX="520.0" layoutY="110.0" prefHeight="138.0" prefWidth="342.0">
+         <columns>
+            <TableColumn fx:id="tcNomEnfantChambre" prefWidth="184.00006103515625" text="Nom" />
+            <TableColumn fx:id="tcPrenomEnfantChambre" prefWidth="152.0" text="Prénom" />
+         </columns>
+      </TableView>
+      <HBox prefHeight="66.0" prefWidth="879.0" style="-fx-background-color: purple;">
+         <children>
+            <Label alignment="CENTER" prefHeight="66.0" prefWidth="882.0" text="Gestion centre aéré" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Button fx:id="btnAjouter" layoutX="377.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnAjouterAction" prefHeight="26.0" prefWidth="150.0" text="Ajouter" />
+      <Label layoutX="378.0" layoutY="306.0" text="Taux remplissage centre aéré" />
+      <Label layoutX="378.0" layoutY="371.0" text="Taux remplissage maison" />
+      <TextField fx:id="txtTauxCentreAere" alignment="CENTER" disable="true" layoutX="378.0" layoutY="331.0" />
+      <TextField fx:id="txtTauxMaison" alignment="CENTER" disable="true" layoutX="378.0" layoutY="397.0" />
+   </children>
+</AnchorPane>
