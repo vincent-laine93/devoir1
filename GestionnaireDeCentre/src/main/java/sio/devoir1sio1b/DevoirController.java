@@ -127,6 +127,8 @@ public class DevoirController implements Initializable
     @FXML
     public void tvChambresClicked(Event event)
     {
+        Chambre chambreSelectionner = tvChambres.getSelectionModel().getSelectedItem();
+        tvEnfantsChambre.setItems(FXCollections.observableList(chambreSelectionner.getEnfants()));
 
     }
 
