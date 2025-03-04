@@ -51,8 +51,6 @@ public class DevoirController implements Initializable
     private TableColumn tcTypeChambre;
 
     //variables
-    private double tauxMaison = 0.0;
-    private double tauxCentreAere = 0.0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -83,8 +81,8 @@ public class DevoirController implements Initializable
         tvMaisons.setItems(FXCollections.observableList(maisons));
         tvEnfantsAll.setItems(FXCollections.observableList(enfants));
 
-
-        txtTauxCentreAere.setText(String.valueOf(tauxCentreAere));
+        //remplissage taux
+        txtTauxCentreAere.setText(String.valueOf(calculerTauxRemplissageCentreAere()));
     }
 
     // Cette méthode permet de remplir les 2 collections
@@ -137,7 +135,7 @@ public class DevoirController implements Initializable
     {
         Maison maisonSelectionner = tvMaisons.getSelectionModel().getSelectedItem();
         tvChambres.setItems(FXCollections.observableList(maisonSelectionner.getChambres()));
-        txtTauxMaison.setText(String.valueOf(tauxMaison));
+        txtTauxMaison.setText(String.valueOf(calculerTauxRemplissageMaison(maisonSelectionner)));
 
     }
 
@@ -169,6 +167,10 @@ public class DevoirController implements Initializable
             //supression et reafichage du tvEnfant
             enfants.remove(enfantSelectionner);
             tvEnfantsAll.setItems(FXCollections.observableList(enfants));
+
+            //affichage des taux
+            txtTauxMaison.setText(String.valueOf(calculerTauxRemplissageMaison(tvMaisons.getSelectionModel().getSelectedItem())));
+            txtTauxCentreAere.setText(String.valueOf(calculerTauxRemplissageCentreAere()));
         }
     }
 
@@ -176,15 +178,23 @@ public class DevoirController implements Initializable
     // du centre aéré
     public double calculerTauxRemplissageCentreAere()
     {
-        // A vous de jouer
-        return 0;
+        double tauxMaison1 = calculerTauxRemplissageMaison(maisons.get(0));
+        double tauxMaison2 = calculerTauxRemplissageMaison(maisons.get(1));
+
+        return tauxMaison1 + tauxMaison2;
     }
 
     // Cette méthode permet de calculer le taux de remplissage
     // de la maison passée en paramétre
     public double calculerTauxRemplissageMaison(Maison maison)
     {
-        // A vous de jouer
-        return 0;
+        int nbChambre = maison.getChambres().size();
+        int nbMaxEnfant = nbChambre * 2;
+        int nbEnfant = 0;
+        for (int i = 0; i < maison.getChambres().size(); i++){
+            nbEnfant += maison.getChambres().get(i).getEnfants().size();
+        }
+
+        return (nbEnfant/nbMaxEnfant) * 100;
     }
 }
