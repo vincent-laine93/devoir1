@@ -144,6 +144,7 @@ public class DevoirController implements Initializable
     {
         Chambre chambreSelectionner = tvChambres.getSelectionModel().getSelectedItem();
         Enfant enfantSelectionner = tvEnfantsAll.getSelectionModel().getSelectedItem();
+        Maison maisonSelectionner = tvMaisons.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Choix incorrect");
         alert.setHeaderText(null);
@@ -169,8 +170,8 @@ public class DevoirController implements Initializable
             tvEnfantsAll.setItems(FXCollections.observableList(enfants));
 
             //affichage des taux
-            txtTauxMaison.setText(String.valueOf(calculerTauxRemplissageMaison(tvMaisons.getSelectionModel().getSelectedItem())));
-            txtTauxCentreAere.setText(String.valueOf(calculerTauxRemplissageCentreAere()));
+            txtTauxMaison.setText(String.format("%.2f", calculerTauxRemplissageMaison(maisonSelectionner)));
+            txtTauxCentreAere.setText(String.format("%.2f", calculerTauxRemplissageCentreAere()));
         }
     }
 
@@ -181,7 +182,7 @@ public class DevoirController implements Initializable
         double tauxMaison1 = calculerTauxRemplissageMaison(maisons.get(0));
         double tauxMaison2 = calculerTauxRemplissageMaison(maisons.get(1));
 
-        return tauxMaison1 + tauxMaison2;
+        return (tauxMaison1 + tauxMaison2)/2;
     }
 
     // Cette méthode permet de calculer le taux de remplissage
@@ -195,6 +196,6 @@ public class DevoirController implements Initializable
             nbEnfant += maison.getChambres().get(i).getEnfants().size();
         }
 
-        return (nbEnfant/nbMaxEnfant) * 100;
+        return ((double) nbEnfant / nbMaxEnfant) * 100;
     }
 }
