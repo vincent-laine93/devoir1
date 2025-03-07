@@ -179,10 +179,17 @@ public class DevoirController implements Initializable
     // du centre aéré
     public double calculerTauxRemplissageCentreAere()
     {
-        double tauxMaison1 = calculerTauxRemplissageMaison(maisons.get(0));
-        double tauxMaison2 = calculerTauxRemplissageMaison(maisons.get(1));
+        int totalEnfants = 0;
+        int totalPlaces = 0;
 
-        return (tauxMaison1 + tauxMaison2)/2;
+        for (Maison maison : maisons) {
+            for (Chambre chambre : maison.getChambres()) {
+                totalEnfants += chambre.getEnfants().size();
+                totalPlaces += 2; // Chaque chambre a 2 places
+            }
+        }
+
+        return ((double) totalEnfants / totalPlaces) * 100;
     }
 
     // Cette méthode permet de calculer le taux de remplissage
